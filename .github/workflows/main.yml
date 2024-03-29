@@ -21,6 +21,7 @@ on:
           - 'ArrowOS 13.1'
           - 'DerpFest 13.0'
           - 'CipherOS 14'
+          - 'Matrixx 14'
       BUILD_DIFFERENT_ROM:
         description: "Command to initialize a different 'repo' project:"
         required: false
@@ -102,6 +103,9 @@ jobs:
         "CipherOS 14")
           export PROJECTFOLDER="/crave-devspaces/Cipher14"
         ;;
+        "Matrixx 14")
+          export PROJECTFOLDER="/crave-devspaces/Matrixx14"
+        ;;
         esac
         if [ -d "$PROJECTFOLDER" ]; then
           echo "$PROJECTFOLDER directory exists, skipping..."
@@ -173,6 +177,9 @@ jobs:
                   "CipherOS 14")
                     repo init -u https://github.com/CipherOS/android_manifest.git -b fourteen --git-lfs --depth=1
                   ;;
+                  "Matrixx 14")
+                    repo init -u https://github.com/ProjectMatrixx/android.git -b 14.0 --git-lfs --depth=1
+                  ;;
               esac
              else
                       ${{ github.event.inputs.BUILD_DIFFERENT_ROM }}
@@ -239,6 +246,10 @@ jobs:
           "CipherOS 14")
             repo init -u https://github.com/CipherOS/android_manifest.git -b fourteen --git-lfs --depth=1
             export BUILD_DIFFERENT_ROM="repo init -u https://github.com/CipherOS/android_manifest.git -b fourteen --git-lfs --depth=1"
+          ;;
+          "Matrixx 14")
+            repo init -u https://github.com/ProjectMatrixx/android.git -b 14.0 --git-lfs --depth=1
+            export BUILD_DIFFERENT_ROM="repo init -u https://github.com/ProjectMatrixx/android.git -b 14.0 --git-lfs --depth=1"
           ;;
         esac
         if [ "${{ github.event.inputs.BUILD_DIFFERENT_ROM }}" == "echo 'Build Starting!'" ]; then
